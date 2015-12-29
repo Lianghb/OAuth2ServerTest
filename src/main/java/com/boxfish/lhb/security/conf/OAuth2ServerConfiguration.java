@@ -50,6 +50,7 @@ public class OAuth2ServerConfiguration {
                     .authorizeRequests()
                     .antMatchers("/me").access("#oauth2.hasScope('read')")
                     .antMatchers("/photos").access("#oauth2.hasScope('read') or (!#oauth2.isOAuth() and hasRole('ROLE_USER'))")
+
             ;
         }
 
@@ -85,16 +86,18 @@ public class OAuth2ServerConfiguration {
                     .refreshTokenValiditySeconds(60) //重新获取token有效时间1分钟
                     .authorities("ROLE_CLIENT", "ROLE_TRUSTED_CLIENT")
                     .authorizedGrantTypes("password", "authorization_code", "refresh_token", "implicit")
-//                    .autoApprove(true)
-//                    .autoApprove("read")
+//                    .autoApprove(true) //自动授权
+//                    .autoApprove("read") //自动授权，read的权限
                     .scopes("read", "write", "trust")
-                    .redirectUris("http://localhost:8080");
+                    .redirectUris("http://localhost:8080/client")
+            ;
         }
 
         @Override
         public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
             endpoints.authenticationManager(authenticationManager)  //必须添加认证管理器，不然会提示认证不支持
 //                    .tokenStore(new InMemoryTokenStore())
+//                    .approvalStoreDisabled() //不会出现授权多选框的页面，只有授权和禁用2项
             ;
 
         }

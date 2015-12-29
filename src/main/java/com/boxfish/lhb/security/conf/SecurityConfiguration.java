@@ -25,7 +25,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
 
-
     @Autowired
     CustomUserDetailsService service;   // 自定义UserDetailService
 
@@ -44,7 +43,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     public void configure(WebSecurity web) throws Exception {
-        web.ignoring().antMatchers("/js/**","/css/**");
+        web.ignoring().antMatchers("/js/**", "/css/**");
     }
 
     @Override
@@ -66,11 +65,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 //                .loginProcessingUrl("/login/login.do")
 //                .loginPage("/login")
 //
-//                .and()
+                .and()
 
-//                .authorizeRequests()
+                .authorizeRequests()
 //                .antMatchers(permitedUrls).permitAll()
-//                .anyRequest().authenticated()
+                .anyRequest().authenticated()
+                .antMatchers("/**").hasRole("USER")
+
 //                .antMatchers(userUrls).hasRole("USER")
 //                .antMatchers(adminUrls).hasRole("ADMIN")
 //                .antMatchers(dbaUrls).hasRole("DBA")
