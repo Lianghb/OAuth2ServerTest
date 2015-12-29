@@ -14,6 +14,7 @@ public class Application {
         SpringApplication.run(Application.class, args);
     }
 
+
 //    @RequestMapping("/")
 //    public String home() {
 //        return "Hello world!";
@@ -67,7 +68,17 @@ public class Application {
 //                    .withClient("my-client-with-secret")
 //                    .authorizedGrantTypes("client_credentials", "password")
 //                    .authorities("ROLE_CLIENT").scopes("read").resourceIds("sparklr")
-//                    .secret("secret");
+//                    .secret("secret")
+//                    .and()
+//                    .withClient("client1")
+//                    .secret("123456")
+//                    .authorities("ROLE_CLIENT")
+//                    .authorizedGrantTypes("password", "authorization_code",
+//                            "refresh_token", "implicit")
+//                    .scopes("read", "write", "trust", "haha")
+//                    .resourceIds("sparklr")
+//                    .accessTokenValiditySeconds(60)
+//                    .redirectUris("http://localhost:8080/");
 //            // @formatter:on
 //        }
 //    }
